@@ -1,0 +1,1 @@
+window.c = 'c'

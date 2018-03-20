@@ -15,6 +15,12 @@ const keys = {
   cert: fs.readFileSync('keys/localhost-cert.pem')
 }
 
+const pushFiles = [
+  'index.css', 'a.css', 'b.css', 'c.css', 'd.css',
+  'index.js', 'a.js', 'b.js', 'c.js', 'd.js',
+  '1.jpg', '2.jpg', '3.jpg', '4.jpg'
+]
+
 
 /* HTTP/1 server */
 
@@ -43,14 +49,7 @@ function h2Handler(stream, headers) {
 
   if (path === '/') {
     // push files to client
-    pushStreamWithFile(stream, 'index.css')
-    pushStreamWithFile(stream, 'index.js')
-    pushStreamWithFile(stream, '1.jpg')
-    pushStreamWithFile(stream, '2.jpg')
-    pushStreamWithFile(stream, '3.jpg')
-    pushStreamWithFile(stream, '4.jpg')
-    pushStreamWithFile(stream, '5.jpg')
-    pushStreamWithFile(stream, '6.jpg')
+    pushFiles.forEach((file) => pushStreamWithFile(stream, file))
 
     respondWithFileForH2(stream, 'index.html')
     return
